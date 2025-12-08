@@ -176,33 +176,27 @@ export function LiveGamesWidget() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="flex items-center justify-between"
       >
         <h2 className="font-display text-2xl md:text-3xl uppercase tracking-wider">
           What's <span className="text-gradient-amber">Running</span>
         </h2>
-        <a href="#schedule" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
-          Full Schedule
-          <ArrowRight className="w-4 h-4" />
-        </a>
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Tournament Section */}
         <div className="space-y-4">
           <TournamentCard tournament={mockTournament} />
+          <a href="#schedule" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+            Full Schedule
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
 
         {/* Cash Games Section */}
-        <div className="space-y-4">
-          <h3 className="font-display text-lg uppercase tracking-wide text-muted-foreground">
-            Cash Games
-          </h3>
-          <div className="space-y-3">
-            {mockCashGames.map((game, index) => (
-              <CashGameCard key={game.id} game={game} index={index} />
-            ))}
-          </div>
+        <div className="space-y-3">
+          {mockCashGames.map((game, index) => (
+            <CashGameCard key={game.id} game={game} index={index} />
+          ))}
         </div>
       </div>
     </div>
