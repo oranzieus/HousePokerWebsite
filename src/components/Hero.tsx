@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
 import heroImage from "@/assets/hero-poker-room.jpg";
 
 export function Hero() {
@@ -65,7 +65,7 @@ export function Hero() {
               <a href="#live">See What's Running</a>
             </Button>
             <Button variant="glass" size="lg" asChild>
-              <a href="/schedule">View Schedule</a>
+              <Link to="/schedule">View Schedule</Link>
             </Button>
           </motion.div>
         </motion.div>
