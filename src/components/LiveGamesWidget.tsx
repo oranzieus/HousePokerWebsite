@@ -34,7 +34,7 @@ const mockTournament: TournamentData = {
   timeRemaining: "11:38",
   rebuys: 8,
   playersRegistered: 29,
-  nextLevel: "Level 6 - 500/100",
+  nextLevel: "Level 6 - 500/1000",
 };
 
 const mockCashGames: CashGameData[] = [
