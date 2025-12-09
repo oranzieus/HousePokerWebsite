@@ -33,6 +33,14 @@ const mockTournament: TournamentData = {
 
 const mockCashGames: CashGameData[] = [
   {
+    id: "3",
+    type: "NLH",
+    stakes: "1/2",
+    playersSeated: 0,
+    waitingListCount: 5,
+    status: "Starting Soon",
+  },
+  {
     id: "1",
     type: "NLH",
     stakes: "2/5",
@@ -47,14 +55,6 @@ const mockCashGames: CashGameData[] = [
     playersSeated: 7,
     waitingListCount: 0,
     status: "Active",
-  },
-  {
-    id: "3",
-    type: "NLH",
-    stakes: "1/2",
-    playersSeated: 0,
-    waitingListCount: 5,
-    status: "Starting Soon",
   },
 ];
 
@@ -128,6 +128,7 @@ function TournamentCard({ tournament }: { tournament: TournamentData }) {
 
 function CashGameCard({ game, index }: { game: CashGameData; index: number }) {
   const isActive = game.status === "Active";
+  const isStartingSoon = game.status === "Starting Soon";
 
   return (
     <motion.div
@@ -146,23 +147,28 @@ function CashGameCard({ game, index }: { game: CashGameData; index: number }) {
               {game.type}
             </div>
             <div>
-              <p className="font-display text-lg">${game.stakes}</p>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Users className="w-3 h-3" />
-                <span>{game.playersSeated} seated</span>
+              {isStartingSoon && (
+                <div className="mb-1">
+                  <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-primary/20 text-primary">
+                    {game.status}
+                  </span>
+                </div>
+              )}
+              <p className="font-display text-lg">€{game.stakes}</p>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="w-3.5 h-3.5" />
+                <span className="font-medium">{game.playersSeated} seated</span>
                 {game.waitingListCount > 0 && (
                   <span className="text-primary">• {game.waitingListCount} waiting</span>
                 )}
               </div>
             </div>
           </div>
-          <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            isActive 
-              ? "bg-secondary/20 text-secondary" 
-              : "bg-primary/20 text-primary"
-          }`}>
-            {game.status}
-          </div>
+          {isActive && (
+            <div className="px-3 py-1 rounded-full text-xs font-semibold bg-secondary/20 text-secondary">
+              {game.status}
+            </div>
+          )}
         </div>
       </Card>
     </motion.div>
