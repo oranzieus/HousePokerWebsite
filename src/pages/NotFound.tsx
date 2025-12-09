@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
@@ -33,10 +33,10 @@ const NotFound = () => {
             This page doesn't exist at House.
           </p>
           <Button variant="hero" size="lg" asChild>
-            <a href="/">
+            <Link to="/">
               <Home className="w-5 h-5 mr-2" />
               Back to the Table
-            </a>
+            </Link>
           </Button>
         </motion.div>
       </div>

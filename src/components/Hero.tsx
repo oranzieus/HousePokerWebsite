@@ -64,7 +64,12 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-20"
           >
             <Button variant="hero" size="xl" asChild>
-              <a href="#live">See What's Running</a>
+              <a href="#live" onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('live')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
+                See What's Running
+              </a>
             </Button>
             <Button variant="glass" size="lg" onClick={() => navigate("/schedule")}>
               View Schedule
