@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
 import { PageLayout, Section, PageHeader } from "@/components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Clock, DollarSign, Users } from "lucide-react";
+import { Clock, Euro, Users, RefreshCw, Timer } from "lucide-react";
 
 interface ScheduleItem {
   id: string;
@@ -11,18 +11,20 @@ interface ScheduleItem {
   buyIn: string;
   startTime: string;
   guaranteed?: string;
+  reEntry?: string;
+  levelTime: string;
 }
 
 // Mock data - will be replaced with Supabase data
 const weeklySchedule: ScheduleItem[] = [
-  { id: "1", dayOfWeek: "Monday", tournamentName: "Monday Night Madness", buyIn: "$50+$10", startTime: "7:00 PM", guaranteed: "$1,000" },
-  { id: "2", dayOfWeek: "Tuesday", tournamentName: "Turbo Tuesday", buyIn: "$30+$5", startTime: "7:30 PM" },
-  { id: "3", dayOfWeek: "Wednesday", tournamentName: "Bounty Hunter", buyIn: "$75+$25", startTime: "7:00 PM", guaranteed: "$2,000" },
-  { id: "4", dayOfWeek: "Thursday", tournamentName: "Deepstack Thursday", buyIn: "$100+$15", startTime: "6:30 PM", guaranteed: "$3,000" },
-  { id: "5", dayOfWeek: "Friday", tournamentName: "Friday Night Freezeout", buyIn: "$150+$20", startTime: "7:00 PM", guaranteed: "$5,000" },
-  { id: "6", dayOfWeek: "Saturday", tournamentName: "Weekend Warrior", buyIn: "$200+$25", startTime: "2:00 PM", guaranteed: "$7,500" },
-  { id: "7", dayOfWeek: "Saturday", tournamentName: "Night Owl Special", buyIn: "$75+$10", startTime: "9:00 PM", guaranteed: "$2,500" },
-  { id: "8", dayOfWeek: "Sunday", tournamentName: "Sunday Showdown", buyIn: "$250+$30", startTime: "3:00 PM", guaranteed: "$10,000" },
+  { id: "1", dayOfWeek: "Monday", tournamentName: "Monday Night Madness", buyIn: "€50+€10", startTime: "7:00 PM", guaranteed: "€1,000", reEntry: "Up to Level 10", levelTime: "15 min" },
+  { id: "2", dayOfWeek: "Tuesday", tournamentName: "Turbo Tuesday", buyIn: "€30+€5", startTime: "7:30 PM", reEntry: "Up to Level 10", levelTime: "15 min" },
+  { id: "3", dayOfWeek: "Wednesday", tournamentName: "Bounty Hunter", buyIn: "€75+€25", startTime: "7:00 PM", guaranteed: "€2,000", reEntry: "Up to Level 10", levelTime: "20 min" },
+  { id: "4", dayOfWeek: "Thursday", tournamentName: "Deepstack Thursday", buyIn: "€100+€15", startTime: "6:30 PM", guaranteed: "€3,000", reEntry: "Up to Level 10", levelTime: "20 min" },
+  { id: "5", dayOfWeek: "Friday", tournamentName: "Friday Night Freezeout", buyIn: "€150+€20", startTime: "7:00 PM", guaranteed: "€5,000", levelTime: "20 min" },
+  { id: "6", dayOfWeek: "Saturday", tournamentName: "Weekend Warrior", buyIn: "€200+€25", startTime: "2:00 PM", guaranteed: "€7,500", reEntry: "Up to Level 10", levelTime: "20 min" },
+  { id: "7", dayOfWeek: "Saturday", tournamentName: "Night Owl Special", buyIn: "€75+€10", startTime: "9:00 PM", guaranteed: "€2,500", reEntry: "Up to Level 10", levelTime: "15 min" },
+  { id: "8", dayOfWeek: "Sunday", tournamentName: "Sunday Showdown", buyIn: "€250+€30", startTime: "3:00 PM", guaranteed: "€10,000", reEntry: "Up to Level 10", levelTime: "20 min" },
 ];
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -48,9 +50,19 @@ function ScheduleCard({ item, index }: { item: ScheduleItem; index: number }) {
                   <span>{item.startTime}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <DollarSign className="w-4 h-4" />
+                  <Euro className="w-4 h-4" />
                   <span>Buy-in: {item.buyIn}</span>
                 </div>
+                <div className="flex items-center gap-1.5">
+                  <Timer className="w-4 h-4" />
+                  <span>{item.levelTime} levels</span>
+                </div>
+                {item.reEntry && (
+                  <div className="flex items-center gap-1.5">
+                    <RefreshCw className="w-4 h-4" />
+                    <span>Re-Entry: {item.reEntry}</span>
+                  </div>
+                )}
               </div>
             </div>
             
@@ -131,7 +143,7 @@ const Schedule = () => {
                   NLH & PLO cash games run daily from <span className="text-foreground font-semibold">12 PM - 4 AM</span>
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Stakes: $1/2, $2/5, $5/5 PLO • Higher stakes on request
+                  Stakes: €1/2, €2/5, €5/5 PLO • Higher stakes on request
                 </p>
               </div>
             </Card>

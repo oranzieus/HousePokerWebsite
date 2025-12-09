@@ -8,7 +8,6 @@ interface Winner {
   id: string;
   playerName: string;
   eventName: string;
-  prizeAmount: string;
   winDate: string;
   imageUrl?: string;
 }
@@ -19,42 +18,36 @@ const mockWinners: Winner[] = [
     id: "1",
     playerName: "Mike Torres",
     eventName: "December Main Event",
-    prizeAmount: "$15,000",
     winDate: "2025-12-07",
   },
   {
     id: "2",
     playerName: "Sarah Chen",
     eventName: "Black Friday Special",
-    prizeAmount: "$8,500",
     winDate: "2025-11-29",
   },
   {
     id: "3",
     playerName: "David Kowalski",
     eventName: "Thanksgiving Turbo",
-    prizeAmount: "$5,200",
     winDate: "2025-11-28",
   },
   {
     id: "4",
     playerName: "Jennifer Williams",
     eventName: "November Championship",
-    prizeAmount: "$12,000",
     winDate: "2025-11-15",
   },
   {
     id: "5",
     playerName: "Robert Kim",
     eventName: "Halloween Bounty",
-    prizeAmount: "$6,800",
     winDate: "2025-10-31",
   },
   {
     id: "6",
     playerName: "Carlos Martinez",
     eventName: "October Classic",
-    prizeAmount: "$9,500",
     winDate: "2025-10-20",
   },
 ];
@@ -78,12 +71,6 @@ function WinnerCard({ winner, index }: { winner: Winner; index: number }) {
         <div className="aspect-[4/3] bg-gradient-to-br from-muted to-background flex items-center justify-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent z-10" />
           <Trophy className="w-16 h-16 text-muted-foreground/30 group-hover:text-primary/40 transition-colors" />
-          {/* Prize amount overlay */}
-          <div className="absolute top-4 right-4 z-20">
-            <span className="px-3 py-1.5 rounded-lg bg-primary font-display text-sm font-bold text-primary-foreground">
-              {winner.prizeAmount}
-            </span>
-          </div>
         </div>
         
         <CardContent className="p-5 space-y-3">
@@ -132,7 +119,7 @@ const Winners = () => {
             <div className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl glass">
               <Trophy className="w-8 h-8 text-primary" />
               <div className="text-left">
-                <p className="font-display text-2xl font-bold text-primary">$250,000+</p>
+                <p className="font-display text-2xl font-bold text-primary">€250,000+</p>
                 <p className="text-sm text-muted-foreground">Total prizes awarded this year</p>
               </div>
             </div>

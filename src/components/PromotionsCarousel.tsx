@@ -1,27 +1,36 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Gift, Trophy, Star } from "lucide-react";
+import { Gift, Trophy, Star, Sparkles } from "lucide-react";
 
 interface Promotion {
   id: string;
   title: string;
   description: string;
-  icon: "gift" | "trophy" | "star";
+  icon: "gift" | "trophy" | "star" | "sparkles";
   highlight?: boolean;
+  isHighHand?: boolean;
 }
 
 const promotions: Promotion[] = [
   {
+    id: "0",
+    title: "Current High Hand",
+    description: "",
+    icon: "sparkles",
+    highlight: true,
+    isHighHand: true,
+  },
+  {
     id: "1",
     title: "High Hand Bonus",
-    description: "Win $500 for the highest hand every Friday & Saturday night.",
+    description: "Win €500 for the highest hand every Friday & Saturday night.",
     icon: "trophy",
     highlight: true,
   },
   {
     id: "2",
     title: "New Player Bonus",
-    description: "First-time players receive a free seat in our Sunday $50 tournament.",
+    description: "First-time players receive a free seat in our Sunday €50 tournament.",
     icon: "gift",
   },
   {
@@ -36,7 +45,19 @@ const icons = {
   gift: Gift,
   trophy: Trophy,
   star: Star,
+  sparkles: Sparkles,
 };
+
+// Playing card component
+function PlayingCard({ rank, suit }: { rank: string; suit: "♠" | "♥" | "♦" | "♣" }) {
+  const isRed = suit === "♥" || suit === "♦";
+  return (
+    <div className={`inline-flex flex-col items-center justify-center w-8 h-11 rounded bg-white text-xs font-bold shadow-md ${isRed ? "text-red-600" : "text-gray-900"}`}>
+      <span className="text-sm leading-none">{rank}</span>
+      <span className="text-xs leading-none">{suit}</span>
+    </div>
+  );
+}
 
 export function PromotionsCarousel() {
   return (
@@ -85,9 +106,19 @@ export function PromotionsCarousel() {
                       <h3 className="font-display text-xl uppercase tracking-wide">
                         {promo.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {promo.description}
-                      </p>
+                      {promo.isHighHand ? (
+                        <div className="flex items-center gap-1.5 py-2">
+                          <PlayingCard rank="A" suit="♠" />
+                          <PlayingCard rank="A" suit="♥" />
+                          <PlayingCard rank="A" suit="♦" />
+                          <PlayingCard rank="8" suit="♣" />
+                          <PlayingCard rank="8" suit="♠" />
+                        </div>
+                      ) : (
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {promo.description}
+                        </p>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
