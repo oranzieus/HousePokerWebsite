@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
 import { PageLayout, Section, PageHeader } from "@/components/PageLayout";
@@ -59,6 +60,8 @@ const mockWinners: Winner[] = [
 ];
 
 function WinnerCard({ winner, index }: { winner: Winner; index: number }) {
+  const [imageError, setImageError] = React.useState(false);
+  
   const formattedDate = new Date(winner.winDate).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -75,28 +78,20 @@ function WinnerCard({ winner, index }: { winner: Winner; index: number }) {
       <Card variant="glass" className="overflow-hidden group hover:border-primary/40 transition-all duration-300 hover:glow-amber">
         {/* Winner photo */}
         <div className="aspect-[4/3] bg-gradient-to-br from-muted to-background flex items-center justify-center relative overflow-hidden">
-          {winner.imageUrl ? (
+          {winner.imageUrl && !imageError ? (
             <>
               <img 
                 src={winner.imageUrl} 
                 alt={winner.playerName}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback to trophy icon if image fails to load
-                  e.currentTarget.style.display = 'none';
-                  const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'flex';
-                }}
+                className="w-full h-full object-cover absolute inset-0"
+                onError={() => setImageError(true)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent z-10" />
-              <div className="hidden absolute inset-0 items-center justify-center" style={{ display: 'none' }}>
-                <Trophy className="w-16 h-16 text-muted-foreground/30 group-hover:text-primary/40 transition-colors" />
-              </div>
             </>
           ) : (
             <>
               <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent z-10" />
-              <Trophy className="w-16 h-16 text-muted-foreground/30 group-hover:text-primary/40 transition-colors" />
+              <Trophy className="w-16 h-16 text-muted-foreground/30 group-hover:text-primary/40 transition-colors z-20" />
             </>
           )}
         </div>
