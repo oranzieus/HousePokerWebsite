@@ -24,7 +24,7 @@ interface CashGameData {
 // Mock data - will be replaced with Supabase real-time data
 const mockTournament: TournamentData = {
   id: "1",
-  name: "Friday Night Freezeout",
+  name: "Tuesday Night Freezeout",
   playersLeft: 24,
   totalEntries: 68,
   currentLevel: "Level 12 - 800/1600",

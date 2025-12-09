@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Gift, Trophy, Star, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Promotion {
   id: string;
@@ -81,7 +82,8 @@ export function PromotionsCarousel() {
         <div className="flex gap-4 px-4 md:px-8 min-w-max">
           {promotions.map((promo, index) => {
             const Icon = icons[promo.icon];
-            return (
+            const isLeaderboard = promo.title === "Leaderboard Points";
+            const cardContent = (
               <motion.div
                 key={promo.id}
                 initial={{ opacity: 0, x: 20 }}
@@ -92,7 +94,7 @@ export function PromotionsCarousel() {
               >
                 <Card
                   variant={promo.highlight ? "live" : "glass"}
-                  className="h-full hover:scale-[1.02] transition-transform duration-300"
+                  className="h-full cursor-pointer hover:scale-[1.02] transition-transform duration-300"
                 >
                   <CardContent className="p-6 space-y-4">
                     <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${
@@ -123,6 +125,14 @@ export function PromotionsCarousel() {
                   </CardContent>
                 </Card>
               </motion.div>
+            );
+
+            return isLeaderboard ? (
+              <Link key={promo.id} to="/leaderboards" className="no-underline">
+                {cardContent}
+              </Link>
+            ) : (
+              cardContent
             );
           })}
         </div>
