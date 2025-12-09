@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Circle, Users, Clock, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface TournamentData {
@@ -186,10 +187,10 @@ export function LiveGamesWidget() {
         {/* Tournament Section */}
         <div className="space-y-4">
           <TournamentCard tournament={mockTournament} />
-          <a href="#schedule" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+          <Link to="/schedule" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
             Full Schedule
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
 
         {/* Cash Games Section */}
