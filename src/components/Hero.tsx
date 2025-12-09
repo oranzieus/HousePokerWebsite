@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-poker-room.jpg";
 
 export function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -64,8 +66,8 @@ export function Hero() {
             <Button variant="hero" size="xl" asChild>
               <a href="#live">See What's Running</a>
             </Button>
-            <Button variant="glass" size="lg" asChild>
-              <Link to="/schedule">View Schedule</Link>
+            <Button variant="glass" size="lg" onClick={() => navigate("/schedule")}>
+              View Schedule
             </Button>
           </motion.div>
         </motion.div>
