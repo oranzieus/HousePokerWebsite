@@ -184,7 +184,7 @@ const Leaderboards = () => {
                 className="font-display"
               >
                 <Trophy className="w-5 h-5 mr-2" />
-                Tournament Points
+                Tournaments
               </Button>
               <Button
                 variant={activeCategory === "cash" ? "hero" : "ghost"}
@@ -193,7 +193,7 @@ const Leaderboards = () => {
                 className="font-display"
               >
                 <TrendingUp className="w-5 h-5 mr-2" />
-                Cash Game Points
+                Cash Games
               </Button>
             </div>
           </motion.div>
