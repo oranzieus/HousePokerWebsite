@@ -9,7 +9,10 @@ interface TournamentData {
   playersLeft: number;
   totalEntries: number;
   currentLevel: string;
-  nextBreak: string;
+  timeRemaining: string;
+  rebuys: number;
+  playersRegistered: number;
+  nextLevel: string;
 }
 
 interface CashGameData {
@@ -27,8 +30,11 @@ const mockTournament: TournamentData = {
   name: "Tuesday Night Freezeout",
   playersLeft: 24,
   totalEntries: 68,
-  currentLevel: "Level 12 - 800/1600",
-  nextBreak: "15 min",
+  currentLevel: "Level 5 - 300/600",
+  timeRemaining: "11:38",
+  rebuys: 8,
+  playersRegistered: 29,
+  nextLevel: "Level 6 - 500/1000",
 };
 
 const mockCashGames: CashGameData[] = [
@@ -75,8 +81,6 @@ function LiveIndicator() {
 }
 
 function TournamentCard({ tournament }: { tournament: TournamentData }) {
-  const progress = (tournament.playersLeft / tournament.totalEntries) * 100;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -104,21 +108,31 @@ function TournamentCard({ tournament }: { tournament: TournamentData }) {
             </div>
           </div>
           
-          {/* Progress bar */}
+          {/* Countdown Timer */}
           <div className="space-y-2">
-            <div className="h-2 bg-muted rounded-full overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="h-full bg-gradient-to-r from-primary to-amber-500"
-              />
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-primary" />
+              <span className="text-xs text-muted-foreground uppercase tracking-wide">Time Remaining</span>
+            </div>
+            <p className="font-display text-3xl text-primary font-bold">{tournament.timeRemaining}</p>
+          </div>
+
+          {/* Additional Information */}
+          <div className="grid grid-cols-2 gap-4 pt-2">
+            <div className="space-y-1">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Rebuys</p>
+              <p className="font-body text-lg font-medium text-foreground">{tournament.rebuys}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Players Registered</p>
+              <p className="font-body text-lg font-medium text-foreground">{tournament.playersRegistered}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Clock className="w-4 h-4" />
-            <span>Next break in {tournament.nextBreak}</span>
+          {/* Next Level */}
+          <div className="space-y-1 pt-2 border-t border-border">
+            <p className="text-xs text-muted-foreground uppercase tracking-wide">Next Level</p>
+            <p className="font-body text-sm font-medium text-foreground">{tournament.nextLevel}</p>
           </div>
         </CardContent>
       </Card>
